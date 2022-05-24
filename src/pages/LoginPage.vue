@@ -1,33 +1,47 @@
 <template>
     <div class="container">
-        <form class="form" @submit="handleSubmit">
+        <form class="form" @submit.prevent="handleSubmit">
             <p>Login</p>
             <q-input type="email"    v-model="email"    class="q-mt-sm" dense label="E-mail" />
             <q-input type="password" v-model="password" class="q-mt-sm" dense label="Password" />
             <q-btn   type="submit" class="q-mt-lg full-width "  >Sing in</q-btn>
-            <a href="/">Criar conta?</a>
-            
+            <a href="/" >Criar conta?</a>
         </form>
     </div>
+    <q-btn @click="userLogout" >logout</q-btn>
+    <q-btn @click="verify" >Verify</q-btn>
 </template>
 
 
 <script setup>
-const { ref } = require("vue");
 
+import {useAuthFirebase} from 'src/composables/useAuthFirebase'
+
+const { ref } = require("vue")
+
+const {auth,loginDefault,userLogout,isAuthenticated} = useAuthFirebase()
 
 let email = ref('')
 let password = ref('')
 
 const handleSubmit = ()=>{
-    console.log(email.value , password.value)
+    loginDefault(email.value , password.value).then( response => console.log(auth.currentUser) )
+}
+const verify = ()=>{
+    console.log(isAuthenticated())
 }
 
 
 
 
 
+
 </script>
+
+
+
+
+
 
 
 
