@@ -8,28 +8,25 @@
             <a href="/" >Criar conta?</a>
         </form>
     </div>
-    <q-btn @click="userLogout" >logout</q-btn>
-    <q-btn @click="verify" >Verify</q-btn>
 </template>
 
 
 <script setup>
-
+import { useRouter } from 'vue-router';
 import {useAuthFirebase} from 'src/composables/useAuthFirebase'
 
-const { ref } = require("vue")
+const router = useRouter();
 
-const {auth,loginDefault,userLogout,isAuthenticated} = useAuthFirebase()
+const { ref } = require("vue")
+const {loginDefault} = useAuthFirebase()
 
 let email = ref('')
 let password = ref('')
 
 const handleSubmit = ()=>{
-    loginDefault(email.value , password.value).then( response => console.log(auth.currentUser) )
+    loginDefault(email.value , password.value).then( response => router.push('/')  )
 }
-const verify = ()=>{
-    console.log(isAuthenticated())
-}
+
 
 
 
@@ -61,7 +58,7 @@ const verify = ()=>{
 
     border: thin solid rgb(219, 219, 219);
     background-color: azure;
-    margin-top: 30px;
+    margin-top: 60px;
     width: 30%;
     min-width: fit-content;
     max-width: 400px;
