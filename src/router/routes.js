@@ -4,7 +4,10 @@ const routes = [
     path: '/login',
     component: () => import('pages/LoginPage.vue'),
   },
-
+  {
+    path: '/new-user',
+    component: () => import('pages/CreateAccount.vue'),
+  },
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),

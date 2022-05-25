@@ -2,10 +2,10 @@
     <div class="container">
         <form class="form" @submit.prevent="handleSubmit">
             <p>Login</p>
-            <q-input type="email"    v-model="email"    class="q-mt-sm" dense label="E-mail" />
-            <q-input type="password" v-model="password" class="q-mt-sm" dense label="Password" />
+            <q-input type="email"    v-model="email"    class="q-mt-sm"  label="E-mail" />
+            <q-input type="password" v-model="password" class="q-mt-sm"  label="Password" />
             <q-btn   type="submit" class="q-mt-lg full-width "  >Sing in</q-btn>
-            <a href="/" >Criar conta?</a>
+            <a @click="$router.replace('/new-user')" >Criar conta?</a>
         </form>
     </div>
 </template>
@@ -55,11 +55,10 @@ const handleSubmit = ()=>{
 
 .form{
     padding: 30px;
-
     border: thin solid rgb(219, 219, 219);
     background-color: azure;
     margin-top: 60px;
-    width: 30%;
+    width: 40%;
     min-width: fit-content;
     max-width: 400px;
 }
