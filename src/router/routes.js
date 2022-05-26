@@ -1,9 +1,6 @@
 
 const routes = [
-  {
-    path: '/login',
-    component: () => import('pages/LoginPage.vue'),
-  },
+
   {
     path: '/new-user',
     component: () => import('pages/CreateAccount.vue'),
@@ -15,6 +12,10 @@ const routes = [
       { path: '', component: () => import('pages/IndexPage.vue') }
     ],
     meta:{requiresAuth: true}
+  },
+  {
+    path: '/login',
+    component: () => import('pages/LoginPage.vue'),
   },
 
 

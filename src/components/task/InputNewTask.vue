@@ -17,6 +17,7 @@ let task = ref('')
 
 
 const handleNewTask =async ()=>{
+  if(task.value=='')return
   newDoc(`users/${auth.currentUser.uid}/tasks`,{name:task.value,status:false}).then(r=>task.value='')
 }
 

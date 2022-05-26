@@ -1,7 +1,7 @@
 <template>
   
   <br/>
-  <p>Bem vindo, <strong> {{userName}}</strong> !</p>
+  <p>Tasks List</p>
   <q-separator/>
   <br>
   
@@ -13,21 +13,6 @@
 
 <script setup>
 import tasks from 'components/task/Taks.vue'
-import auth from 'src/composables/useAuthFirebase';
-import { useDataBaseFirestore } from 'src/composables/useDataBaseFirestore';
-import { ref } from 'vue';
-
-
-
-const {getDocument} = useDataBaseFirestore()
-let userName = ref('')
-
-
-const getUser = async ()=>{
-  await getDocument('users',auth.currentUser.uid).then(user => userName.value=user['nome'])
-}
-getUser()
-
 
 </script>
 

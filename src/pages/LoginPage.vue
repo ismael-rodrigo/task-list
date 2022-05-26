@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div id="container">
         <form class="form" @submit.prevent="handleSubmit">
             <p>Login</p>
             <q-input type="email"    v-model="email"    class="q-mt-sm"  label="E-mail" />
@@ -9,7 +9,7 @@
             <br>
 
             <div class="google-login">
-            <q-btn  unelevated @click="" >
+            <q-btn  unelevated @click="handleLoginWithGoogle" >
                 <q-icon>
                     <img src="~assets/login/googleLoginIcon.png">
                 </q-icon>
@@ -30,7 +30,6 @@ import { useRouter } from 'vue-router';
 import {useAuthFirebase} from 'src/composables/useAuthFirebase'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import auth from 'src/composables/useAuthFirebase';
-
 import { useDataBaseFirestore } from 'src/composables/useDataBaseFirestore';
 
 const { ref } = require("vue")
@@ -40,8 +39,8 @@ const router = useRouter();
 
 
 const {loginDefault} = useAuthFirebase()
-const {getCollectionByFilter} = useDataBaseFirestore()
-
+const {getDocument,newDocWithId} = useDataBaseFirestore()
+const route = useRouter()
 
 let email = ref('')
 let password = ref('')
@@ -53,25 +52,31 @@ const handleSubmit = ()=>{
 const handleLoginWithGoogle = async ()=>{
 
 signInWithPopup(auth, provider)
-  .then((result) => {
-   console.log(result.user.uid)
-  }).catch((error) => {
-
-
-  });
+  .then(async (result) => {
+    if(!await getDocument('users',result.user.uid)){
+        await newDocWithId('users',result.user.uid,{nome:result.user.displayName})
+        .then((r)=>{
+            route.push('/')
+            console.log('conta criada!')
+        })
+        .catch((e)=>console.log(e))
+    }
+    else{
+        route.push('/')
+    }})
+    .catch((error) => {
+        console.log(error)
+    });
 }
-
-
 
 </script>
 
 
 
+<style scoped>
 
-
-<style>
-.container{
-    display: flex;
+#container {
+    display: flex ;
     flex-direction: column;
     justify-content: center;
     align-items: center;
