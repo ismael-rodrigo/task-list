@@ -6,7 +6,21 @@
             <q-input type="password" v-model="password" class="q-mt-sm"  label="Password" />
             <q-btn   type="submit" class="q-mt-lg full-width "  >Sing in</q-btn>
             <a @click="$router.replace('/new-user')" >Criar conta?</a>
+            <br>
+
+            <div class="google-login">
+            <q-btn  unelevated @click="" >
+                <q-icon>
+                    <img src="~assets/login/googleLoginIcon.png">
+                </q-icon>
+
+                <span>
+                    Login com Google
+                </span>
+            </q-btn>
+            </div>
         </form>
+        
     </div>
 </template>
 
@@ -14,11 +28,20 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import {useAuthFirebase} from 'src/composables/useAuthFirebase'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import auth from 'src/composables/useAuthFirebase';
+
+import { useDataBaseFirestore } from 'src/composables/useDataBaseFirestore';
+
+const { ref } = require("vue")
+const provider = new GoogleAuthProvider();
 
 const router = useRouter();
 
-const { ref } = require("vue")
+
 const {loginDefault} = useAuthFirebase()
+const {getCollectionByFilter} = useDataBaseFirestore()
+
 
 let email = ref('')
 let password = ref('')
@@ -27,19 +50,20 @@ const handleSubmit = ()=>{
     loginDefault(email.value , password.value).then( response => router.push('/')  )
 }
 
+const handleLoginWithGoogle = async ()=>{
+
+signInWithPopup(auth, provider)
+  .then((result) => {
+   console.log(result.user.uid)
+  }).catch((error) => {
 
 
-
+  });
+}
 
 
 
 </script>
-
-
-
-
-
-
 
 
 
@@ -71,7 +95,7 @@ const handleSubmit = ()=>{
 
 .form a{
     text-decoration: none;
-    margin-top: 5px;
+    margin-top: 10px;
     display: block;
     text-align: center;
     font-size: 10px;
@@ -79,6 +103,21 @@ const handleSubmit = ()=>{
 }
 .form a:hover{
     color: rgb(65, 167, 167);
+}
+
+.form img{
+    width: 50px;
+}
+
+.google-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-login img{
+    width: 50px;
+    margin-right: 10px;
 }
 
 
