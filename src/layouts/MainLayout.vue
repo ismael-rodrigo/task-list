@@ -7,6 +7,16 @@
         <q-toolbar-title>
           Task List
         </q-toolbar-title>
+
+        <div class="dark-button">
+          
+          <span id="dark-button" @click="handleDarkMode" v-bind:class="{ activeDark: !darkMode }" class="material-icons float-right q-pr-lg">
+            light_mode
+          </span>
+
+        </div>
+
+
         <q-btn class="float-right" size="sm" color="red" @click="handleLogout">Logout</q-btn>
       </q-toolbar>
     </q-header>
@@ -41,7 +51,8 @@ import { ref } from "vue";
 import { useRouter } from 'vue-router';
 import auth from 'src/composables/useAuthFirebase';
 import { useDataBaseFirestore } from 'src/composables/useDataBaseFirestore';
-
+import { useQuasar } from 'quasar'
+import { Dark } from 'quasar'
 
 
 const {getDocument} = useDataBaseFirestore()
@@ -68,6 +79,8 @@ const {userLogout} = useAuthFirebase()
 const router = useRouter()
 const leftDrawerOpen = ref(false)
 
+const $q = useQuasar()
+
 const toggleLeftDrawer  = ()=>{
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
@@ -75,6 +88,17 @@ const toggleLeftDrawer  = ()=>{
 const handleLogout = ()=>{
   userLogout().then(()=>router.push('/login'))
 }
+
+let darkMode = ref(true)
+
+const handleDarkMode = ()=>{
+  darkMode.value = !darkMode.value
+  Dark.set(darkMode.value) 
+}
+
+
+
+
 
 
 </script>
@@ -109,6 +133,17 @@ const handleLogout = ()=>{
   position: absolute;
   bottom:1px;
 }
+
+
+#dark-button{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.activeDark{
+  color: darkorange;
+}
+
 
 
 </style>

@@ -24,4 +24,6 @@ import tasks from 'components/task/Taks.vue'
     width: 500px;
 
   }
+
+
 </style>

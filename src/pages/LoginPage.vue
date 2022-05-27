@@ -46,7 +46,11 @@ let email = ref('')
 let password = ref('')
 
 const handleSubmit = ()=>{
-    loginDefault(email.value , password.value).then( response => router.push('/')  )
+    loginDefault(email.value , password.value)
+    .then( response => router.push('/')  )
+    .catch((e)=>{
+        alert(e)
+    })
 }
 
 const handleLoginWithGoogle = async ()=>{
