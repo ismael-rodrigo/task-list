@@ -1,6 +1,10 @@
-# Quasar App (task-list)
 
-A Quasar Project
+# Task List (Vue quasar + Firebase )
+
+<img style="width:50%" src='public/TaskList.png' > </img>
+<img style="width:50%" src='public/TaskListLogin.png' > </img>
+<img style="width:50%" src='public/TaskListNewUser.png' > </img>
+
 
 ## Install the dependencies
 ```bash
