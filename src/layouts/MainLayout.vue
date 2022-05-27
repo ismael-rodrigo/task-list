@@ -52,7 +52,8 @@ const getUser = async ()=>{
   await getDocument('users',auth.currentUser.uid).then(user =>{
      userName.value=user['nome']
     if(auth.currentUser.photoURL){
-      photoUser.value = auth.currentUser.photoURL
+      console.log(auth.currentUser['photoURL'])
+      photoUser.value = auth.currentUser['photoURL']
     }
     else{
       photoUser.value = 'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg'

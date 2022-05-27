@@ -49,6 +49,18 @@ onMounted(()=>{
                 selection.value.push(doc.data().name)
             }
             })
+
+
+        tasks.value.sort(function(task){
+            if(task.data.status){
+                return 1
+            }
+            else{
+                return -1
+            }
+            
+        })
+
         });
 })
 
