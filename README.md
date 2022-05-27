@@ -1,9 +1,9 @@
 
 # Task List (Vue quasar + Firebase )
 
-<img style="width:50%" src='public/TaskList.png' > </img>
-<img style="width:50%" src='public/TaskListLogin.png' > </img>
-<img style="width:50%" src='public/TaskListNewUser.png' > </img>
+<img  src='public/TaskList.png' > </img>
+<img  src='public/TaskListLogin.png' > </img>
+<img  src='public/TaskListNewUser.png' > </img>
 
 
 ## Install the dependencies
