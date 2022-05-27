@@ -79,7 +79,7 @@ const {userLogout} = useAuthFirebase()
 const router = useRouter()
 const leftDrawerOpen = ref(false)
 
-const $q = useQuasar()
+let darkMode = ref(false)
 
 const toggleLeftDrawer  = ()=>{
         leftDrawerOpen.value = !leftDrawerOpen.value
@@ -89,7 +89,7 @@ const handleLogout = ()=>{
   userLogout().then(()=>router.push('/login'))
 }
 
-let darkMode = ref(true)
+
 
 const handleDarkMode = ()=>{
   darkMode.value = !darkMode.value
